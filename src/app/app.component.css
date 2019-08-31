@@ -1,0 +1,14 @@
+.topSection {
+  background-color: rgb(103, 58, 183);
+  color: rgba(255, 255, 255, 1);
+  height: 287px;
+}
+
+.card {
+  margin-top: -65px;
+  border-top: 10px solid rgb(174, 121, 255);
+}
+
+.helper-text {
+  color: red;
+}

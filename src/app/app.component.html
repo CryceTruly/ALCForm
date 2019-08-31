@@ -1,4 +1,101 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<h1>Start</h1>
+<div class="topSection">
 
-<router-outlet></router-outlet>
+</div>
+
+<div class="row">
+  <div class="col m3"></div>
+  <div class="col m6">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-title">ALC 4.0: Challenge 2.0 Submission</div>
+        <p>This form enables Learners in the Android and Cloud Track to submit their Challenge for the ALC team to
+          review.</p>
+        <div *ngIf="!submitted else showSubmitted">
+
+
+          <span class="red-text">
+            required *
+          </span>
+          <div class="row">
+            <form [formGroup]="ourForm">
+              <div class="input-field s12">
+                <input type="email" id="email" formControlName="email" class="validate">
+                <label for="email">Email</label>
+                <div *ngIf="ourForm.get('email').touched && ourForm.get('email').errors?.required">
+                  <span class="helper-text">The email is required</span>
+                </div>
+                <div *ngIf="ourForm.get('email').touched && ourForm.get('email').errors?.email">
+                  <span class="helper-text">The email is invalid</span>
+                </div>
+
+              </div>
+              <div class="input-field s12">
+                <input type="text" id="fullName" formControlName="fullName" class="validate">
+                <label for="fullName">FullName</label>
+                <div *ngIf="ourForm.get('fullName').touched && ourForm.get('fullName').errors?.required">
+                  <span class="helper-text">The fullName is required</span>
+                </div>
+              </div>
+              <div class="s12">
+                <p>Track *</p>
+                <br>
+                <p>
+                  <label>
+                    <input name="track" type="radio" (click)="trackChanged('Android')" formControlName="track"
+                      id="track" value="Android">
+                    <span>Android</span>
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input name="track" type="radio" (click)="trackChanged('Cloud')" formControlName="track" id="track"
+                      value="Cloud">
+                    <span>Cloud</span>
+                  </label>
+                </p>
+              </div>
+              <div class="input-field s12">
+                <input type="text" id="screenshots" formControlName="screenshots">
+                <label for="screenshots">Screenshots Url</label>
+                <div *ngIf="ourForm.get('screenshots').touched && ourForm.get('screenshots').errors?.required">
+                  <span class="helper-text">The screenshots url is required</span>
+                </div>
+                <div *ngIf="ourForm.get('screenshots').touched && ourForm.get('screenshots').errors?.validURL">
+                  <span class="helper-text">The url is not valid</span>
+                </div>
+                <small>We expect you to have finished the challenge and have added the files to an open folder</small>
+              </div>
+              <div class="input-field s12">
+                <input type="text" id="githubURL" formControlName="githubURL">
+                <label for="githubURL">GithubURL Url (Android Only)</label>
+                <div *ngIf="ourForm.get('githubURL').touched && ourForm.get('githubURL').errors?.required">
+                  <span class="helper-text">The github url is required</span>
+
+                </div>
+                <div *ngIf="ourForm.get('githubURL').touched && ourForm.get('githubURL').errors?.validURL">
+                  <span class="helper-text">The url is not valid</span>
+                </div>
+              </div>
+              <div class="input-field s12">
+                <textarea class="materialize-textarea" formControlName="feedback" type="text" id="feedback"></textarea>
+                <label for="feedback">FeedBack</label>
+              </div>
+
+              <div class="progress" *ngIf="submitting">
+                <div class="indeterminate"></div>
+              </div>
+              <input type="submit" value="Submit" [disabled]="ourForm.invalid" (click)="submitData(ourForm.value)"
+                class="btn">
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <ng-template #showSubmitted>
+      <p class="green-text">Thanks for submitting your assignment, we wish you all the best.</p>
+    </ng-template>
+  </div>
+  <div class="col m3"></div>
+</div>
